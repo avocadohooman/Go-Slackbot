@@ -32,12 +32,13 @@ jobs:
       with:
         go-version: 1.17
     - name: Trigger Slackbot
-      run: go run slackNotification.go https://github.com/avocadohooman/Go-Slackbot SUCCESS githubRun:${{ github.run_number }} ${{ github.event.head_commit.message }}
+      run: go run slackNotification.go https://github.com/avocadohooman/Go-Slackbot SUCCESS githubRun:${{ github.run_number }} "${{ github.event.head_commit.message }}"
       env:
         SLACK_OAUTH_TOKEN: ${{secrets.SLACK_OAUTH_TOKEN}}
 
 
-  buildFailed:    
+  buildFailed:
+    needs: [build]    
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -47,5 +48,5 @@ jobs:
         go-version: 1.17
     - name: Build failed
       if: failure() && steps.build.outcome == 'failure'
-      run: go run slackNotification.go https://github.com/avocadohooman/Go-Slackbot FAILED githubRun:${{ github.run_number }} ${{ github.event.head_commit.message }}
+      run: go run slackNotification.go https://github.com/avocadohooman/Go-Slackbot FAILED githubRun:${{ github.run_number }} "${{ github.event.head_commit.message }}"
   
