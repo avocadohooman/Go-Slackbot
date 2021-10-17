@@ -33,6 +33,8 @@ jobs:
         go-version: 1.17
     - name: Trigger Slackbot
       run: go run slackNotification.go https://github.com/avocadohooman/Go-Slackbot SUCCESS githubRun:${{ github.run_number }} github.event.commits.*.message
+      env:
+        SLACK_OAUTH_TOKEN: ${{secrets.SLACK_OAUTH_TOKEN}}
 
 
   buildFailed:    
