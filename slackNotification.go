@@ -53,7 +53,7 @@ func main() {
 	)
 
 	_, _, _, err = api.SendMessage(
-		"C02J0BZHMC",
+		"C02J0BZHMCK",
 		msg,
 	)
 
