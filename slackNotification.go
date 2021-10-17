@@ -24,6 +24,7 @@ func main() {
 		fmt.Printf("Usage: jenkinsURL buildResult buildNumber jobName \n")
 		return 
 	}
+	
 	api := slack.New(os.Getenv("SLACK_OAUTH_TOKEN"))
 	preText := "*Hello! Your GitHub Actions build has finished*"
 	jenkinsURL := "*Build URL:*" + args[0]
